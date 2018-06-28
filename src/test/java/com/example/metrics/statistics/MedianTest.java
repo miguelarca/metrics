@@ -7,19 +7,30 @@ import static org.junit.Assert.*;
 public class MedianTest {
     @Test
     public void itShouldReturnMedianValueFromOddLengthArray() {
-        final double[] values = { 50.0, 10.8, 600.766, 0.1, 78.1 };
+        final Sequence<Double> values = new ArrayListSequence<>();
+        values.insert(9.0);
+        values.insert(50.0);
+        values.insert(10.8);
+        values.insert(600.766);
+        values.insert(0.1);
 
         Statistic statistic = new Median();
 
         double value = statistic.getValue(values);
 
-        assertEquals(50.0, value, 0);
+        assertEquals(10.8, value, 0);
     }
 
     @Test
     public void itShouldReturnTheRightReportFromOddLengthArray() {
-        final double[] values = { 50.0, 10.8, 600.766, 0.1, 78.1 };
-        final StatisticReport report = SimpleReport.of("This is the median value", 50.0);
+        final Sequence<Double> values = new ArrayListSequence<>();
+        values.insert(9.0);
+        values.insert(50.0);
+        values.insert(10.8);
+        values.insert(600.766);
+        values.insert(0.1);
+
+        final StatisticReport report = SimpleReport.of("This is the median value", 10.8);
 
         Statistic statistic = new Median();
 
@@ -28,7 +39,11 @@ public class MedianTest {
 
     @Test
     public void itShouldReturnMedianValueFromEvenLengthArray() {
-        final double[] values = { 50.0, 10.8, 600.766, 0.1 };
+        final Sequence<Double> values = new ArrayListSequence<>();
+        values.insert(50.0);
+        values.insert(10.8);
+        values.insert(600.766);
+        values.insert(0.1);
 
         Statistic statistic = new Median();
 
@@ -39,7 +54,12 @@ public class MedianTest {
 
     @Test
     public void itShouldReturnTheRightReportFromEvenLengthArray() {
-        final double[] values = { 50.0, 10.8, 600.766, 0.1 };
+        final Sequence<Double> values = new ArrayListSequence<>();
+        values.insert(50.0);
+        values.insert(10.8);
+        values.insert(600.766);
+        values.insert(0.1);
+
         final StatisticReport report = SimpleReport.of("This is the median value", 30.4);
 
         Statistic statistic = new Median();

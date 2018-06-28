@@ -1,19 +1,15 @@
 package com.example.metrics.statistics;
 
-import java.util.Arrays;
-
 public class Max implements Statistic {
     private final static String message = "This is the maximum value";
 
     @Override
-    public double getValue(double[] values) {
-        Arrays.sort(values);
-
-        return values[values.length - 1];
+    public double getValue(Sequence<Double> values) {
+        return values.getLast();
     }
 
     @Override
-    public StatisticReport getReport(double[] values) {
+    public StatisticReport getReport(Sequence<Double> values) {
         return SimpleReport.of(message, this.getValue(values));
     }
 }

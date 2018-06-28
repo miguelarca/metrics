@@ -1,6 +1,6 @@
 package com.example.metrics.statistics;
 
 public interface Statistic {
-    double getValue(double[] values);
-    StatisticReport getReport(double[] values);
+    double getValue(Sequence<Double> values);
+    StatisticReport getReport(Sequence<Double> values);
 }

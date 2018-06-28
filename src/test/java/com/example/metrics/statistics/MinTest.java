@@ -7,7 +7,11 @@ import static org.junit.Assert.*;
 public class MinTest {
     @Test
     public void itShouldReturnMinValue() {
-        final double[] values = { 50.0, 10.8, 600.766, 0.1 };
+        final Sequence<Double> values = new ArrayListSequence<>();
+        values.insert(50.0);
+        values.insert(10.8);
+        values.insert(600.766);
+        values.insert(0.1);
 
         Statistic statistic = new Min();
 
@@ -18,7 +22,12 @@ public class MinTest {
 
     @Test
     public void itShouldReturnTheRightReport() {
-        final double[] values = { 50.0, 10.8, 600.766, 0.1 };
+        final Sequence<Double> values = new ArrayListSequence<>();
+        values.insert(50.0);
+        values.insert(10.8);
+        values.insert(600.766);
+        values.insert(0.1);
+
         final StatisticReport report = SimpleReport.of("This is the minimum value", 0.1);
 
         Statistic statistic = new Min();

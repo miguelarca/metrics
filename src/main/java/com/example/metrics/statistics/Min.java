@@ -1,19 +1,16 @@
 package com.example.metrics.statistics;
 
-import java.util.Arrays;
-
 final class Min implements Statistic {
     private final static String message = "This is the minimum value";
 
     @Override
-    public double getValue(double[] values) {
-        Arrays.sort(values);
+    public double getValue(Sequence<Double> values) {
 
-        return values[0];
+        return values.getFirst();
     }
 
     @Override
-    public StatisticReport getReport(double[] values) {
+    public StatisticReport getReport(Sequence<Double> values) {
         return SimpleReport.of(message, this.getValue(values));
     }
 }
