@@ -1,10 +1,12 @@
 package com.example.metrics.statistics;
 
-final class Min implements Statistic {
+import org.springframework.stereotype.Component;
+
+@Component
+class Min implements Statistic {
     private final static String message = "This is the minimum value";
 
-    @Override
-    public double getValue(Sequence<Double> values) {
+    private double getValue(Sequence<Double> values) {
 
         return values.getFirst();
     }

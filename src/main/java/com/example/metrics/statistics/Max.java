@@ -1,10 +1,12 @@
 package com.example.metrics.statistics;
 
-public class Max implements Statistic {
+import org.springframework.stereotype.Component;
+
+@Component
+class Max implements Statistic {
     private final static String message = "This is the maximum value";
 
-    @Override
-    public double getValue(Sequence<Double> values) {
+    private double getValue(Sequence<Double> values) {
         return values.getLast();
     }
 
