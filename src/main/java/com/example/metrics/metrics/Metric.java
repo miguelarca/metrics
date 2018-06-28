@@ -1,9 +1,6 @@
 package com.example.metrics.metrics;
 
-import com.example.metrics.statistics.Sequence;
-import com.example.metrics.statistics.SequenceFactory;
-import com.example.metrics.statistics.Statistic;
-import com.example.metrics.statistics.StatisticReport;
+import com.example.metrics.statistics.*;
 import org.springframework.util.Assert;
 
 import javax.validation.Valid;
@@ -12,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Valid
 final class Metric implements NameableMetric {
     private final String name;
-    private final Sequence<Double> values;
+    private final TotalizingSequence<Double> values;
 
     Metric(@NotNull String name) {
         Assert.hasLength(name, "A metric requires a name");

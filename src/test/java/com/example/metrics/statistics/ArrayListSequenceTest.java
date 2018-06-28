@@ -10,7 +10,7 @@ public class ArrayListSequenceTest {
 
     @Before
     public void setUp(){
-        sequence = new ArrayListSequence<>();
+        sequence = new ArrayListSequence();
 
         sequence.insert(3.0);
         sequence.insert(9.0);

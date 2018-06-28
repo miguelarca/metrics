@@ -7,14 +7,10 @@ import java.util.stream.StreamSupport;
 @Component
 class Mean implements Statistic {
     @Override
-    public StatisticReport getReport(Sequence<Double> values) {
+    public StatisticReport getReport(TotalizingSequence<Double> values) {
         int totalElements = values.size();
 
-        Double sum = StreamSupport.stream(values.spliterator(), true)
-                .reduce((firstValue, secondValue) -> firstValue + secondValue)
-                .orElse(0.0);
-
-        return SimpleReport.of( "This is the mean value", sum / totalElements);
+        return SimpleReport.of( "This is the mean value", values.sum() / totalElements);
     }
 
 }

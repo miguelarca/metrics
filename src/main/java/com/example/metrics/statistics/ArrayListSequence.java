@@ -5,23 +5,25 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-final class ArrayListSequence<T> implements Sequence<T> {
-    private ArrayList<T> arrayList = new ArrayList<>();
+final class ArrayListSequence implements TotalizingSequence<Double> {
+    private ArrayList<Double> arrayList = new ArrayList<>();
+    private Double sum = 0.0;
 
     @Override
-    public void insert(T value) {
+    public void insert(Double value) {
         int point = this.findInsertionPoint(value);
         this.arrayList.add(point, value);
+        this.sum += value;
     }
 
     @SuppressWarnings("unchecked")
-    private int findInsertionPoint(T insertionValue) {
+    private int findInsertionPoint(Double insertionValue) {
         int low = 0;
         int high = size() - 1;
 
         while (low <= high) {
             int middle = (low + high) >>> 1;
-            Comparable<? super T> middleValue = (Comparable<T>) this.arrayList.get(middle);
+            Comparable<? super Double> middleValue = this.arrayList.get(middle);
             int compareToResult = middleValue.compareTo(insertionValue);
 
             if (compareToResult < 0)
@@ -37,17 +39,17 @@ final class ArrayListSequence<T> implements Sequence<T> {
     }
 
     @Override
-    public T getFirst() {
+    public Double getFirst() {
         return this.getElement(0);
     }
 
     @Override
-    public T getLast() {
+    public Double getLast() {
         return this.getElement(this.size() - 1);
     }
 
     @Override
-    public T getElement(int index) {
+    public Double getElement(int index) {
         return this.arrayList.get(index);
     }
 
@@ -57,17 +59,22 @@ final class ArrayListSequence<T> implements Sequence<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<Double> iterator() {
         return this.arrayList.iterator();
     }
 
     @Override
-    public void forEach(Consumer<? super T> action) {
+    public void forEach(Consumer<? super Double> action) {
         this.arrayList.forEach(action);
     }
 
     @Override
-    public Spliterator<T> spliterator() {
+    public Spliterator<Double> spliterator() {
         return this.arrayList.spliterator();
+    }
+
+    @Override
+    public Double sum() {
+        return this.sum;
     }
 }

@@ -1,5 +1,5 @@
 package com.example.metrics.statistics;
 
 public interface Statistic {
-    StatisticReport getReport(Sequence<Double> values);
+    StatisticReport getReport(TotalizingSequence<Double> values);
 }

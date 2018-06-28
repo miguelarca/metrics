@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 class Median implements Statistic {
     private final static String message = "This is the median value";
 
-    private double getValue(Sequence<Double> values) {
+    private double getValue(TotalizingSequence<Double> values) {
 
         if (values.size() % 2 != 0){
             return values.getElement(values.size() / 2);
@@ -17,7 +17,7 @@ class Median implements Statistic {
     }
 
     @Override
-    public StatisticReport getReport(Sequence<Double> values) {
+    public StatisticReport getReport(TotalizingSequence<Double> values) {
         return SimpleReport.of(message, this.getValue(values));
     }
 
