@@ -14,12 +14,6 @@ final class ArrayListSequence<T> implements Sequence<T> {
         this.arrayList.add(point, value);
     }
 
-    /**
-     * Finds the insertion point using binary search
-     *
-     * @param insertionValue value to be inserted
-     * @return the insertion point for the value
-     */
     @SuppressWarnings("unchecked")
     private int findInsertionPoint(T insertionValue) {
         int low = 0;
