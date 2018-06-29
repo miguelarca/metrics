@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class ArrayListSequenceTest {
+public class DoubleArrayListSequenceTest {
     private Sequence<Double> sequence;
 
     @Before
     public void setUp(){
-        sequence = new ArrayListSequence();
+        sequence = new DoubleArrayListSequence();
 
         sequence.insert(3.0);
         sequence.insert(9.0);

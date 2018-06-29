@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class MeanTest {
     @Test
     public void itShouldReturnTheRightReport() {
-        final TotalizingSequence<Double> values = new ArrayListSequence();
+        final TotalizingSequence<Double> values = new DoubleArrayListSequence();
         values.insert(50.0);
         values.insert(10.8);
         values.insert(600.766);

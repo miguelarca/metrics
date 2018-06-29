@@ -35,7 +35,7 @@ public class MetricsServiceTest {
         final String metricName = "Quick Metric";
         final String id = "quick-metric";
 
-        NameableMetric quickMetric = service.createMetric(metricName);
+        ReportableMetric quickMetric = service.createMetric(metricName);
 
         assertEquals(metricName, quickMetric.getName());
         assertEquals(id, quickMetric.getId());
@@ -87,11 +87,11 @@ public class MetricsServiceTest {
 
         service.createMetric(metricName);
 
-        Collection<? extends NameableMetric> metrics = service.getMetrics();
+        Collection<? extends ReportableMetric> metrics = service.getMetrics();
 
         assertEquals(1, metrics.size());
 
-        NameableMetric metric = metrics.iterator().next();
+        ReportableMetric metric = metrics.iterator().next();
 
         assertEquals(id, metric.getId());
         assertEquals(metricName, metric.getName());

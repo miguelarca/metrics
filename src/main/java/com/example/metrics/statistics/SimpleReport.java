@@ -1,5 +1,10 @@
 package com.example.metrics.statistics;
 
+/**
+ * Implementation of the StatisticReport
+ *
+ * @author Miguel.Mendez
+ */
 final class SimpleReport implements StatisticReport {
     private final String message;
     private final double value;
@@ -17,16 +22,25 @@ final class SimpleReport implements StatisticReport {
         return new SimpleReport(message, value);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String getMessage() {
         return this.message;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public double getValue() {
         return this.value;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,6 +52,9 @@ final class SimpleReport implements StatisticReport {
         return message != null ? message.equals(that.message) : that.message == null;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public int hashCode() {
         int result;

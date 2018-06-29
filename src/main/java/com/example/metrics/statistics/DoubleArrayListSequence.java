@@ -5,10 +5,24 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-final class ArrayListSequence implements TotalizingSequence<Double> {
+/**
+ * Implementation of a TotalizingSequence of Doubles backed by an ArrayList. The array list is kept in ascending order
+ * by finding the insertion point using a binary search and letting the ArrayList do the shifting
+ *
+ * @author Miguel.Mendez
+ */
+final class DoubleArrayListSequence implements TotalizingSequence<Double> {
     private ArrayList<Double> arrayList = new ArrayList<>();
     private Double sum = 0.0;
 
+    /**
+     * @inheritDoc
+     *
+     * Inserts the value in order by first finding the insertion point using a binary search and letting the ArrayList
+     * do the shifting
+     *
+     * @param value Double
+     */
     @Override
     public void insert(Double value) {
         int point = this.findInsertionPoint(value);
@@ -38,43 +52,67 @@ final class ArrayListSequence implements TotalizingSequence<Double> {
         return low;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Double getFirst() {
         return this.getElement(0);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Double getLast() {
-        int lastIndex = this.size() > 0 ? this.size() - 1 : 0;
+        int lastIndex = this.size();
 
         return this.getElement(lastIndex);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Double getElement(int index) {
         return this.arrayList.get(index);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public int size() {
         return this.arrayList.size();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Iterator<Double> iterator() {
         return this.arrayList.iterator();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void forEach(Consumer<? super Double> action) {
         this.arrayList.forEach(action);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Spliterator<Double> spliterator() {
         return this.arrayList.spliterator();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public Double sum() {
         return this.sum;

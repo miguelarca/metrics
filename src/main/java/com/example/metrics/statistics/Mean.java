@@ -2,10 +2,16 @@ package com.example.metrics.statistics;
 
 import org.springframework.stereotype.Component;
 
-import java.util.stream.StreamSupport;
-
+/**
+ * It creates statistic report based on the mean value contained in a TotalizingSequence of Doubles
+ *
+ * @author Miguel.Mendez
+ */
 @Component
 class Mean implements Statistic {
+    /**
+     * @inheritDoc
+     */
     @Override
     public StatisticReport getReport(TotalizingSequence<Double> values) {
         int totalElements = values.size();

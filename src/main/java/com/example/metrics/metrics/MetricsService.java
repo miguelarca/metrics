@@ -10,6 +10,17 @@ import org.springframework.util.Assert;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 
+/**
+ * The metrics service encapsulates all of the operations that can be done on a metric. It holds a collection of metrics
+ * by the user.
+ *
+ * It holds a collection of statistics which are components that will provide an statistic report of the values of a metric.
+ * Those statistic are registered in the IOC container (Spring context) and get dependency injected when the bean is created.
+ * It also exposes a method to register more statistics at runtime.
+ *
+ * @author Miguel.Mendez
+ *
+ */
 @Service
 public class MetricsService {
     private final List<Statistic> statistics;
@@ -20,7 +31,7 @@ public class MetricsService {
         this.metrics = new HashMap<>();
     }
 
-    public NameableMetric createMetric(String metricName){
+    public ReportableMetric createMetric(String metricName){
         Metric newMetric = new Metric(metricName);
 
         if(metrics.containsKey(newMetric.getId())){
@@ -32,11 +43,15 @@ public class MetricsService {
         return newMetric;
     }
 
+    public void addStatistic(Statistic statistic) {
+        this.statistics.add(statistic);
+    }
+
     public void clearMetrics(){
         metrics.clear();
     }
 
-    public NameableMetric getNameableMetric(String metricId) {
+    public ReportableMetric getNameableMetric(String metricId) {
         return getMetric(metricId);
     }
 
@@ -48,7 +63,7 @@ public class MetricsService {
         return metrics.get(metricId);
     }
 
-    public Collection<NameableMetric> getMetrics() {
+    public Collection<ReportableMetric> getMetrics() {
         return Collections.unmodifiableCollection(metrics.values());
     }
 

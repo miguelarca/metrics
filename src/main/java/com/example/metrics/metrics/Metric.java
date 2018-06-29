@@ -6,8 +6,13 @@ import org.springframework.util.Assert;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+/**
+ * A Metric is a container that holds a collection of values. Those values can be used to run statistic reports
+ *
+ * @author Miguel.Mendez
+ */
 @Valid
-final class Metric implements NameableMetric {
+final class Metric implements ReportableMetric {
     private final String name;
     private final TotalizingSequence<Double> values;
 

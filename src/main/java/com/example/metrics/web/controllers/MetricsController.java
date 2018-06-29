@@ -2,7 +2,7 @@ package com.example.metrics.web.controllers;
 
 import com.example.metrics.commands.AddMetricValue;
 import com.example.metrics.metrics.MetricsService;
-import com.example.metrics.metrics.NameableMetric;
+import com.example.metrics.metrics.ReportableMetric;
 import com.example.metrics.statistics.StatisticReport;
 import com.example.metrics.web.requests.AddValueDTO;
 import com.example.metrics.web.requests.CreateMetricDTO;
@@ -31,14 +31,14 @@ public class MetricsController {
 
     @GetMapping
     ResponseEntity<?> getMetrics() {
-        Collection<NameableMetric> metrics = metricsService.getMetrics();
+        Collection<ReportableMetric> metrics = metricsService.getMetrics();
 
         return ResponseEntity.ok(createNameableMetricResources(metrics));
     }
 
     @GetMapping("/{metricId}")
     ResponseEntity<?> getMetric(@PathVariable String metricId) {
-        NameableMetric metric = metricsService.getNameableMetric(metricId);
+        ReportableMetric metric = metricsService.getNameableMetric(metricId);
 
         return ResponseEntity.ok(createMetricResource(metric));
     }
@@ -52,7 +52,7 @@ public class MetricsController {
 
     @PostMapping
     ResponseEntity<?> createMetric(@RequestBody @Valid CreateMetricDTO dto) {
-        NameableMetric metric = metricsService.createMetric(dto.getMetricName());
+        ReportableMetric metric = metricsService.createMetric(dto.getMetricName());
 
         return ResponseEntity.ok(createMetricResource(metric));
     }
@@ -66,8 +66,8 @@ public class MetricsController {
         return ResponseEntity.accepted().build();
     }
 
-    private Resource<NameableMetric> createMetricResource(NameableMetric responseBody) {
-        Resource<NameableMetric> resource = new Resource<>(responseBody);
+    private Resource<ReportableMetric> createMetricResource(ReportableMetric responseBody) {
+        Resource<ReportableMetric> resource = new Resource<>(responseBody);
 
         Link selfLink = linkTo(methodOn(MetricsController.class).getMetric(responseBody.getId())).withSelfRel();
         Link addValueLink = linkTo(methodOn(MetricsController.class)
@@ -93,7 +93,7 @@ public class MetricsController {
         return new Resources(responseBody, selfRel);
     }
 
-    private Resources<Collection<NameableMetric>> createNameableMetricResources(Collection<NameableMetric> responseBody) {
+    private Resources<Collection<ReportableMetric>> createNameableMetricResources(Collection<ReportableMetric> responseBody) {
 
         Link metricsListLink = linkTo(methodOn(MetricsController.class).getMetrics()).withSelfRel();
         Link addMetricLink = linkTo(methodOn(MetricsController.class).createMetric(null)).withRel("create");

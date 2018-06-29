@@ -8,7 +8,7 @@ public class MedianTest {
 
     @Test
     public void itShouldReturnTheRightReportFromOddLengthArray() {
-        final TotalizingSequence<Double> values = new ArrayListSequence();
+        final TotalizingSequence<Double> values = new DoubleArrayListSequence();
         values.insert(9.0);
         values.insert(50.0);
         values.insert(10.8);
@@ -25,7 +25,7 @@ public class MedianTest {
 
     @Test
     public void itShouldReturnTheRightReportFromEvenLengthArray() {
-        final TotalizingSequence<Double> values = new ArrayListSequence();
+        final TotalizingSequence<Double> values = new DoubleArrayListSequence();
         values.insert(50.0);
         values.insert(10.8);
         values.insert(600.766);

@@ -4,6 +4,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Command DTO that contains needed values to add value to a particular metric
+ *
+ * @author Miguel Mendez
+ */
 @Valid
 public class AddMetricValue {
     @NotBlank
