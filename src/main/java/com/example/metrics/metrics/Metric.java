@@ -28,8 +28,17 @@ final class Metric implements NameableMetric {
         }
     }
 
+    @Override
+    public boolean isReportable() {
+        return this.values.size() > 0;
+    }
+
     StatisticReport runReport(@NotNull Statistic statistic) {
         Assert.notNull(statistic, "A statistic implementation is needed to run a report");
+
+        if(!isReportable()){
+            throw new NotReportableMetric(this.name);
+        }
 
         return statistic.getReport(this.values);
     }

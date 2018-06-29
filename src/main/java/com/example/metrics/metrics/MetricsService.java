@@ -32,6 +32,18 @@ public class MetricsService {
         return newMetric;
     }
 
+    public NameableMetric getNameableMetric(String metricId) {
+        return getMetric(metricId);
+    }
+
+    private Metric getMetric(String metricId) {
+        if(!metrics.containsKey(metricId)){
+            throw new ObjectNotFound("No metric with id: " + metricId);
+        }
+
+        return metrics.get(metricId);
+    }
+
     public Collection<? extends NameableMetric> getMetrics() {
         return Collections.unmodifiableCollection(metrics.values());
     }
@@ -39,11 +51,8 @@ public class MetricsService {
     public void addValue(@NotNull AddMetricValue command) {
         Assert.notNull(command, "An AddMetricValue command is required");
 
-        if(!metrics.containsKey(command.getMetricId())){
-            throw new ObjectNotFound("No metric with id: " + command.getMetricId());
-        }
+        Metric metric = getMetric(command.getMetricId());
 
-        Metric metric = metrics.get(command.getMetricId());
         metric.addValue(command.getMetricValue());
     }
 

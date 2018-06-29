@@ -45,7 +45,9 @@ final class ArrayListSequence implements TotalizingSequence<Double> {
 
     @Override
     public Double getLast() {
-        return this.getElement(this.size() - 1);
+        int lastIndex = this.size() > 0 ? this.size() - 1 : 0;
+
+        return this.getElement(lastIndex);
     }
 
     @Override
