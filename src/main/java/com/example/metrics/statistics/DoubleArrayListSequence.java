@@ -67,7 +67,7 @@ final class DoubleArrayListSequence implements TotalizingSequence<Double> {
     public Double getLast() {
         int lastIndex = this.size();
 
-        return this.getElement(lastIndex);
+        return this.getElement(lastIndex -1 );
     }
 
     /**

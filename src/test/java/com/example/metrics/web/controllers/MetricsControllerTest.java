@@ -1,5 +1,6 @@
 package com.example.metrics.web.controllers;
 
+import com.example.metrics.commands.AddMetricValue;
 import com.example.metrics.metrics.MetricsService;
 import org.junit.After;
 import org.junit.Test;
@@ -170,6 +171,37 @@ public class MetricsControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldNotReturnListOfStatisticReportsForEmptyCollection() throws Exception {
+        final String metricName = "Quick Metric";
+        final String id = "quick-metric";
+
+        metricsService.createMetric(metricName);
+
+        this.mockMvc.perform(
+                get("/metrics/" + id + "/statistics"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldReturnListOfStatisticReports() throws Exception {
+        final String metricName = "Quick Metric";
+        final String id = "quick-metric";
+
+        metricsService.createMetric(metricName);
+        metricsService.addValue(new AddMetricValue(id, 45.0));
+        metricsService.addValue(new AddMetricValue(id, 4.340));
+        metricsService.addValue(new AddMetricValue(id, 5.4535));
+        metricsService.addValue(new AddMetricValue(id, 32.4365));
+
+        this.mockMvc.perform(
+                get("/metrics/" + id + "/statistics"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/hal+json;charset=UTF-8"))
+                .andExpect(jsonPath("$._embedded.simpleReportList").exists())
+                .andExpect(jsonPath("$._embedded.simpleReportList").isArray());
     }
 
 }
