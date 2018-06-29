@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -118,6 +119,10 @@ public class MetricsServiceTest {
         service = new MetricsService(Collections.singletonList(statistic));
 
         service.createMetric(metricName);
+
+        for(Double value: Arrays.asList(2.3, 89.5, 47.2)){
+            service.addValue(new AddMetricValue(id, value));
+        }
 
         List<StatisticReport> statistics = service.getStatisticsFor(id);
 

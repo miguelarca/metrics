@@ -3,6 +3,9 @@ package com.example.metrics.metrics;
 import com.example.metrics.statistics.*;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class MetricTest {
@@ -42,13 +45,11 @@ public class MetricTest {
         final String reportName = "Test Report";
         final double reportValue = 0.0;
 
-        final Sequence<Double> values = SequenceFactory.ofDouble();
-        values.insert(50.0);
-        values.insert(10.8);
-        values.insert(600.766);
-        values.insert(0.1);
-
         Metric metric = new Metric(name);
+
+        for(Double value: Arrays.asList(2.3, 89.5, 47.2)){
+            metric.addValue(value);
+        }
 
         StatisticReport statisticReport = metric.runReport(reportValues -> new StatisticReport() {
             @Override

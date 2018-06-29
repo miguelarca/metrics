@@ -11,6 +11,8 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class MetricsController {
 
     @GetMapping
     ResponseEntity<?> getMetrics() {
-        Collection<? extends NameableMetric> metrics = metricsService.getMetrics();
+        Collection<NameableMetric> metrics = metricsService.getMetrics();
 
         return ResponseEntity.ok(createNameableMetricResources(metrics));
     }
@@ -49,14 +51,14 @@ public class MetricsController {
     }
 
     @PostMapping
-    ResponseEntity<?> createMetric(@RequestBody CreateMetricDTO dto) {
+    ResponseEntity<?> createMetric(@RequestBody @Valid CreateMetricDTO dto) {
         NameableMetric metric = metricsService.createMetric(dto.getMetricName());
 
         return ResponseEntity.ok(createMetricResource(metric));
     }
 
     @PostMapping("/{metricId}/values")
-    ResponseEntity<?> addValue(@RequestBody AddValueDTO dto, @PathVariable String metricId) {
+    ResponseEntity<?> addValue(@RequestBody @Valid AddValueDTO dto, @PathVariable String metricId) {
         AddMetricValue addMetricValue = new AddMetricValue(metricId, dto.getValue());
 
         metricsService.addValue(addMetricValue);
@@ -74,7 +76,10 @@ public class MetricsController {
         resource.add(selfLink, addValueLink);
 
         if(responseBody.isReportable()){
-            Link statisticLink = linkTo(methodOn(MetricsController.class).getMetricStatistics(responseBody.getId())).withRel("statistics");
+            Link statisticLink = linkTo(methodOn(MetricsController.class)
+                    .getMetricStatistics(responseBody.getId()))
+                    .withRel("statistics");
+
             resource.add(statisticLink);
         }
 
@@ -85,18 +90,15 @@ public class MetricsController {
 
         Link selfRel = linkTo(methodOn(MetricsController.class).getMetricStatistics(metricId)).withSelfRel();
 
-        Resources resources = new Resources<>(responseBody, selfRel);
-
-        return resources;
+        return new Resources(responseBody, selfRel);
     }
 
-    private Resources<Collection<? extends NameableMetric>> createNameableMetricResources(Collection<? extends NameableMetric> responseBody) {
+    private Resources<Collection<NameableMetric>> createNameableMetricResources(Collection<NameableMetric> responseBody) {
 
         Link metricsListLink = linkTo(methodOn(MetricsController.class).getMetrics()).withSelfRel();
         Link addMetricLink = linkTo(methodOn(MetricsController.class).createMetric(null)).withRel("create");
 
-        Resources resources = new Resources<>(responseBody, metricsListLink, addMetricLink);
+        return new Resources(responseBody, metricsListLink, addMetricLink);
 
-        return resources;
     }
 }

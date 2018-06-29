@@ -1,6 +1,9 @@
 package com.example.metrics.web.requests;
 
+import javax.validation.constraints.NotBlank;
+
 public class CreateMetricDTO {
+    @NotBlank
     private String metricName;
 
     public String getMetricName() {

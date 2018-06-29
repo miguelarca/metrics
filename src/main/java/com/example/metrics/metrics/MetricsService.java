@@ -32,6 +32,10 @@ public class MetricsService {
         return newMetric;
     }
 
+    public void clearMetrics(){
+        metrics.clear();
+    }
+
     public NameableMetric getNameableMetric(String metricId) {
         return getMetric(metricId);
     }
@@ -44,7 +48,7 @@ public class MetricsService {
         return metrics.get(metricId);
     }
 
-    public Collection<? extends NameableMetric> getMetrics() {
+    public Collection<NameableMetric> getMetrics() {
         return Collections.unmodifiableCollection(metrics.values());
     }
 
