@@ -1,0 +1,8 @@
+com.example.metrics
+com.example.metrics.commands
+com.example.metrics.commons.exceptions
+com.example.metrics.metrics
+com.example.metrics.statistics
+com.example.metrics.web.controllers
+com.example.metrics.web.requests
+com.example.metrics.web.responses
