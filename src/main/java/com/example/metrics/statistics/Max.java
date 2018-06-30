@@ -20,6 +20,7 @@ class Max implements Statistic {
 
     /**
      * @inheritDoc
+     * @param values
      */
     @Override
     public StatisticReport getReport(TotalizingSequence<Double> values) {

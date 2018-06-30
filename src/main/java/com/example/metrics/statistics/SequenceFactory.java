@@ -6,7 +6,7 @@ package com.example.metrics.statistics;
  * @author Miguel.Mendez
  */
 public class SequenceFactory {
-    public static TotalizingSequence<Double> ofDouble(){
+    public static MutableTotalizingSequence<Double> ofDouble(){
         return new DoubleArrayListSequence();
     }
 }

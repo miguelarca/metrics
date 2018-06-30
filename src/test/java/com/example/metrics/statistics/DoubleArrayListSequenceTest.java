@@ -6,11 +6,11 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.*;
 
 public class DoubleArrayListSequenceTest {
-    private Sequence<Double> sequence;
+    private MutableTotalizingSequence<Double> sequence;
 
     @Before
     public void setUp(){
-        sequence = new DoubleArrayListSequence();
+        sequence = SequenceFactory.ofDouble();
 
         sequence.insert(3.0);
         sequence.insert(9.0);

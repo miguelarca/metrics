@@ -9,12 +9,6 @@ package com.example.metrics.statistics;
  * @author Miguel.Mendez
  */
 public interface Sequence<T> extends Iterable<T>{
-    /**
-     * Inserts an element to the sequence in its natural order. keeping the sequence ordered
-     *
-     * @param value
-     */
-    void insert(T value);
 
     /**
      * It provides the first element of the sequence

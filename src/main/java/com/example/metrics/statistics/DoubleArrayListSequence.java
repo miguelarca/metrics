@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  *
  * @author Miguel.Mendez
  */
-final class DoubleArrayListSequence implements TotalizingSequence<Double> {
+final class DoubleArrayListSequence implements MutableTotalizingSequence<Double> {
     private ArrayList<Double> arrayList = new ArrayList<>();
     private Double sum = 0.0;
 

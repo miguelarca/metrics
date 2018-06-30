@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Valid
 final class Metric implements ReportableMetric {
     private final String name;
-    private final TotalizingSequence<Double> values;
+    private final MutableTotalizingSequence<Double> values;
 
     Metric(@NotNull String name) {
         Assert.hasLength(name, "A metric requires a name");
