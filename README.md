@@ -23,7 +23,7 @@ User should be able to add values to a metric
 
 To add values to a metric you can go to /metrics/{id}/values and send a POST request with the following payload:
 ```json
-{"value":4546.55"
+{"value":4546.55"}
 ```
 You should get a 202 response.
 
@@ -42,8 +42,17 @@ All of the endpoints exposed provide links. We take advantage of [HATEOAS](https
 
 How to run this app?
 -------------------
-This app is a [Spring Boot](https://spring.io/projects/spring-boot) app and it is built using [Apache Maven](https://maven.apache.org/). To run just issue the following at the command propmt:
+This app is a [Spring Boot](https://spring.io/projects/spring-boot) app and it is built using [Apache Maven](https://maven.apache.org/). 
+
+To run just issue the following at the command propmt:
 ```bash
 $ mvn spring-boot:run
 ```
 You can access it on http://localhost:8080
+
+Tests
+-----
+A test suite is also provided with unit and integration tests. Just issue the following at the command propmt:
+```bash
+$ mvn test
+```
